@@ -24,7 +24,7 @@
     }
 
     header {
-      padding: 60px 20px 20px;
+      padding: 70px 20px 30px;
       animation: fadeIn 1.5s ease forwards;
     }
 
@@ -33,6 +33,23 @@
       font-weight: 600;
       color: #fff;
       text-shadow: 0 3px 10px rgba(0,0,0,0.15);
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    h1 i {
+      background: rgba(255,255,255,0.2);
+      padding: 10px;
+      border-radius: 50%;
+      backdrop-filter: blur(8px);
+      color: #fff;
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      transition: transform 0.3s ease;
+    }
+
+    h1 i:hover {
+      transform: rotate(-10deg) scale(1.1);
     }
 
     p {
@@ -146,7 +163,7 @@
 </head>
 <body>
   <header>
-    <h1>Selamat Datang di Uncle Property</h1>
+    <h1><i class="lucide-home"></i> Uncle Property</h1>
     <p>Partner terpercaya Anda dalam investasi tanah kavling eksklusif dengan lokasi strategis dan potensi tinggi di Bali.</p>
     <div class="links">
       <a href="#tentang"><i class="lucide-info"></i> Tentang Kami</a>
