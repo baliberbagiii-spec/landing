@@ -164,14 +164,18 @@
       line-height: 1.5;
     }
 
-    footer {
-      text-align: center;
-      padding: 30px;
+     footer {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      padding: 10px 0; /* 🔹 Kurangi padding biar lebih ramping */
       font-size: 0.9rem;
       opacity: 0.8;
-      background: rgba(255, 255, 255, 0.1);
-      margin-top: 80px;
+      text-align: center;
+      background: rgba(255,255,255,0.05); /* opsional: biar terlihat rapi */
+      backdrop-filter: blur(4px);
     }
+
 
     @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-20px); }
@@ -255,3 +259,4 @@
   <footer>© 2025 Uncle Property. All rights reserved.</footer>
 </body>
 </html>
+
