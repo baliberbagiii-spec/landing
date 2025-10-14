@@ -6,203 +6,149 @@
   <title>Uncle Property</title>
   <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet" />
   <style>
-    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: "Poppins", sans-serif;
-      scroll-behavior: smooth;
+      font-family: 'Poppins', sans-serif;
     }
 
     body {
-      background: linear-gradient(135deg, #6a11cb, #2575fc);
-      color: white;
+      background: linear-gradient(135deg, #EB5A3C, #DF9755, #E7D283, #EDF4C2);
+      color: #2b2b2b;
+      text-align: center;
       overflow-x: hidden;
+      min-height: 100vh;
     }
 
     header {
-      text-align: center;
-      padding: 80px 20px 60px;
-      position: relative;
+      padding: 60px 20px 20px;
+      animation: fadeIn 1.5s ease forwards;
     }
 
-    header::before {
-      content: "";
-      position: absolute;
-      width: 200%;
-      height: 200%;
-      top: -50%;
-      left: -50%;
-      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
-      animation: rotateWave 20s linear infinite;
-      z-index: 0;
-    }
-
-    @keyframes rotateWave {
-      from { transform: rotate(0deg); }
-      to { transform: rotate(360deg); }
-    }
-
-    header h1 {
-      font-size: 2.8rem;
+    h1 {
+      font-size: clamp(1.8rem, 4vw, 3rem);
       font-weight: 600;
-      z-index: 1;
-      position: relative;
-      animation: fadeDown 1.2s ease;
+      color: #fff;
+      text-shadow: 0 3px 10px rgba(0,0,0,0.15);
     }
 
-    header p {
-      font-size: 1.1rem;
-      opacity: 0.9;
+    p {
+      font-size: clamp(1rem, 2.5vw, 1.2rem);
       margin-top: 10px;
-      z-index: 1;
-      position: relative;
-      animation: fadeDown 1.5s ease;
-    }
-
-    .nav-links {
-      display: flex;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 40px;
-      flex-wrap: wrap;
-    }
-
-    .nav-links a {
-      text-decoration: none;
-      color: white;
-      background: rgba(255, 255, 255, 0.15);
-      padding: 12px 25px;
-      border-radius: 40px;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-      transition: 0.3s ease;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .nav-links a:hover {
-      background: rgba(255, 255, 255, 0.3);
-      transform: translateY(-3px);
+      color: #fdfdfd;
+      opacity: 0.9;
     }
 
     section {
       padding: 60px 20px;
-      text-align: center;
-      max-width: 1000px;
-      margin: 0 auto;
     }
 
+    .links {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 15px;
+      margin-top: 40px;
+    }
+
+    .links a {
+      text-decoration: none;
+      color: #fff;
+      background: rgba(255, 255, 255, 0.2);
+      padding: 12px 25px;
+      border-radius: 40px;
+      font-weight: 500;
+      backdrop-filter: blur(10px);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+      transition: all 0.3s ease;
+      box-shadow: 0 2px 10px rgba(0, 0, 0, 0.15);
+    }
+
+    .links a:hover {
+      transform: translateY(-3px);
+      background: linear-gradient(135deg, #DF9755, #E7D283);
+      color: #2b2b2b;
+      font-weight: 600;
+    }
+
+    /* Tentang Kami */
     #tentang {
-      background: rgba(255, 255, 255, 0.1);
-      border-radius: 20px;
-      padding: 40px;
-      margin-top: 50px;
-      backdrop-filter: blur(8px);
-      animation: fadeUp 1.5s ease;
-    }
-
-    #tentang h2 {
-      font-size: 2rem;
-      margin-bottom: 20px;
-    }
-
-    #tentang p {
-      font-size: 1.1rem;
+      max-width: 800px;
+      margin: 0 auto;
       line-height: 1.8;
-      opacity: 0.95;
+      background: rgba(255,255,255,0.25);
+      border-radius: 16px;
+      padding: 25px;
+      backdrop-filter: blur(8px);
+      color: #2b2b2b;
+      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
     }
 
-    #proyek {
-      margin-top: 70px;
-    }
-
-    #proyek h2 {
-      font-size: 2rem;
-      margin-bottom: 40px;
-    }
-
-    .grid {
+    /* Proyek Kami */
+    .projects {
       display: grid;
       grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-      gap: 25px;
+      gap: 20px;
+      margin-top: 40px;
     }
 
-    .card {
-      background: rgba(255, 255, 255, 0.15);
+    .project-card {
+      background: rgba(255,255,255,0.25);
       border-radius: 20px;
       overflow: hidden;
-      backdrop-filter: blur(10px);
       transition: all 0.3s ease;
+      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
     }
 
-    .card:hover {
-      transform: translateY(-5px) scale(1.02);
+    .project-card:hover {
+      transform: translateY(-5px);
+      background: rgba(255,255,255,0.35);
     }
 
-    .card img {
+    .project-card img {
       width: 100%;
       height: 180px;
       object-fit: cover;
     }
 
-    .card-content {
-      padding: 20px;
+    .project-card h3 {
+      font-size: 1.1rem;
+      margin: 15px 10px 5px;
+      color: #333;
     }
 
-    .card-content h3 {
-      margin-bottom: 10px;
-      font-size: 1.2rem;
-    }
-
-    .card-content p {
+    .project-card p {
       font-size: 0.95rem;
-      opacity: 0.9;
-      line-height: 1.5;
+      padding: 0 15px 20px;
+      color: #444;
     }
 
-     footer {
-      position: relative;
-      bottom: 0;
-      width: 100%;
-      padding: 10px 0; /* 🔹 Kurangi padding biar lebih ramping */
+    footer {
+      text-align: center;
+      padding: 12px 0;
       font-size: 0.9rem;
       opacity: 0.8;
-      text-align: center;
-      background: rgba(255,255,255,0.05); /* opsional: biar terlihat rapi */
-      backdrop-filter: blur(4px);
+      color: #fff;
+      background: rgba(0,0,0,0.1);
+      backdrop-filter: blur(5px);
     }
 
-
-    @keyframes fadeDown {
-      from { opacity: 0; transform: translateY(-20px); }
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(10px); }
       to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes fadeUp {
-      from { opacity: 0; transform: translateY(20px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @media (max-width: 600px) {
-      header h1 {
-        font-size: 2rem;
-      }
-      .nav-links a {
-        padding: 10px 20px;
-      }
     }
   </style>
 </head>
 <body>
   <header>
     <h1>Selamat Datang di Uncle Property</h1>
-    <p>Investasi tanah kavling dengan lokasi strategis dan nilai masa depan yang menjanjikan.</p>
-
-    <div class="nav-links">
+    <p>Partner terpercaya Anda dalam investasi tanah kavling eksklusif dengan lokasi strategis dan potensi tinggi di Bali.</p>
+    <div class="links">
       <a href="#tentang"><i class="lucide-info"></i> Tentang Kami</a>
       <a href="#proyek"><i class="lucide-map-pin"></i> Proyek Kami</a>
       <a href="https://wa.me/62895365282575?text=Halo%20Uncle%20Property!%20Saya%20tertarik%20dengan%20informasi%20tanah%20kavling." target="_blank">
@@ -213,50 +159,39 @@
 
   <section id="tentang">
     <h2>Tentang Kami</h2>
-    <p>
-      Uncle Property adalah mitra terpercaya Anda dalam investasi tanah kavling.  
-      Kami percaya bahwa setiap jengkal tanah menyimpan potensi besar untuk masa depan yang lebih sejahtera.  
-      Dengan pengalaman dan jaringan yang luas, kami menghadirkan pilihan lahan strategis dengan nilai jual tinggi,  
-      baik untuk investasi jangka panjang maupun pembangunan properti impian Anda.  
-      Komitmen kami adalah memberikan pelayanan profesional, transparan, dan menguntungkan bagi setiap klien.
-    </p>
+    <p>Uncle Property hadir sebagai solusi investasi cerdas di bidang properti tanah kavling. Kami mengutamakan kejelasan legalitas, lokasi premium, serta potensi nilai jual tinggi.  
+      Dengan pengalaman dan komitmen tinggi, kami membantu Anda memiliki aset tanah yang aman, menguntungkan, dan bernilai masa depan.  
+      Setiap proyek yang kami tawarkan dirancang agar menjadi pilihan ideal — baik untuk membangun hunian impian maupun investasi jangka panjang.</p>
   </section>
 
   <section id="proyek">
     <h2>Proyek Kami</h2>
-    <div class="grid">
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=60" alt="Tanah Kavling Yeh Gangga">
-        <div class="card-content">
-          <h3>Tanah Kavling Yeh Gangga</h3>
-          <p>Lokasi hanya 5 menit dari pantai. Harga mulai 530 juta/100m². Cocok untuk villa atau investasi jangka panjang.</p>
-        </div>
+    <div class="projects">
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" alt="Tanah Kavling Yeh Gangga">
+        <h3>Tanah Kavling Yeh Gangga</h3>
+        <p>Lokasi hanya 5 menit dari pantai Yeh Gangga. Harga mulai 530 juta/100m². Cocok untuk villa pribadi atau investasi jangka panjang.</p>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=60" alt="Tanah Muding Mekar">
-        <div class="card-content">
-          <h3>Tanah Kavling Muding Mekar</h3>
-          <p>Area strategis dekat pusat kota Denpasar. Harga 900 juta/are. Infrastruktur siap, cocok untuk hunian eksklusif.</p>
-        </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4" alt="Tanah Kavling Muding Mekar">
+        <h3>Tanah Kavling Muding Mekar</h3>
+        <p>Area strategis dekat pusat kota Denpasar. Harga 900 juta/are. Infrastruktur siap, cocok untuk hunian eksklusif.</p>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60" alt="Tanah Cepaka Village">
-        <div class="card-content">
-          <h3>Tanah Kavling Cepaka Village</h3>
-          <p>Suasana tenang di tengah alam hijau Tabanan. Cocok untuk villa pribadi. Harga bersaing dan legalitas aman.</p>
-        </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Tanah Kavling Cepaka Village">
+        <h3>Tanah Kavling Cepaka Village</h3>
+        <p>Suasana tenang di tengah alam hijau Tabanan. Cocok untuk villa pribadi. Harga bersaing dengan legalitas aman.</p>
       </div>
-      <div class="card">
-        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=60" alt="Tanah Cemagi View">
-        <div class="card-content">
-          <h3>Tanah Kavling Cemagi View</h3>
-          <p>View sawah dan laut memukau. Akses mudah ke Canggu dan Tanah Lot. Investasi ideal untuk masa depan Anda.</p>
-        </div>
+      <div class="project-card">
+        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Tanah Kavling Cemagi View">
+        <h3>Tanah Kavling Cemagi View</h3>
+        <p>View sawah dan laut memukau. Akses mudah ke Canggu dan Tanah Lot. Investasi ideal untuk masa depan Anda.</p>
       </div>
     </div>
   </section>
 
-  <footer>© 2025 Uncle Property. All rights reserved.</footer>
+  <footer>
+    © 2025 Uncle Property. All rights reserved.
+  </footer>
 </body>
 </html>
-
