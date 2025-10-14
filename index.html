@@ -1,42 +1,41 @@
 <!DOCTYPE html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Bincang Property</title>
-  <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet">
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Uncle Property</title>
+  <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet" />
   <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+    @import url("https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap");
 
     * {
       margin: 0;
       padding: 0;
       box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+      font-family: "Poppins", sans-serif;
+      scroll-behavior: smooth;
     }
 
     body {
-      height: 100vh;
       background: linear-gradient(135deg, #6a11cb, #2575fc);
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-      align-items: center;
-      justify-content: center;
       color: white;
-      text-align: center;
-      position: relative;
-      animation: fadeIn 1.5s ease forwards;
+      overflow-x: hidden;
     }
 
-    /* Background waves */
-    .wave {
+    header {
+      text-align: center;
+      padding: 80px 20px 60px;
+      position: relative;
+    }
+
+    header::before {
+      content: "";
       position: absolute;
       width: 200%;
       height: 200%;
-      left: -50%;
       top: -50%;
-      background: radial-gradient(circle at 50% 50%, rgba(255,255,255,0.1), transparent 70%);
+      left: -50%;
+      background: radial-gradient(circle at 50% 50%, rgba(255, 255, 255, 0.1), transparent 70%);
       animation: rotateWave 20s linear infinite;
       z-index: 0;
     }
@@ -46,125 +45,213 @@
       to { transform: rotate(360deg); }
     }
 
-    h1 {
+    header h1 {
       font-size: 2.8rem;
       font-weight: 600;
-      margin-bottom: 10px;
-      opacity: 0;
-      animation: slideDown 1.5s ease forwards 0.2s;
       z-index: 1;
+      position: relative;
+      animation: fadeDown 1.2s ease;
     }
 
-    p {
+    header p {
       font-size: 1.1rem;
-      opacity: 0;
-      animation: slideDown 1.5s ease forwards 0.5s;
-      margin-bottom: 40px;
+      opacity: 0.9;
+      margin-top: 10px;
       z-index: 1;
+      position: relative;
+      animation: fadeDown 1.5s ease;
     }
 
-    .links {
+    .nav-links {
       display: flex;
-      flex-wrap: wrap;
       justify-content: center;
       gap: 15px;
-      opacity: 0;
-      animation: fadeIn 1.5s ease forwards 0.8s;
-      z-index: 1;
+      margin-top: 40px;
+      flex-wrap: wrap;
     }
 
-    .links a {
+    .nav-links a {
       text-decoration: none;
       color: white;
-      background: linear-gradient(90deg, rgba(255,255,255,0.15), rgba(255,255,255,0.05));
+      background: rgba(255, 255, 255, 0.15);
       padding: 12px 25px;
       border-radius: 40px;
       font-weight: 500;
       backdrop-filter: blur(10px);
+      transition: 0.3s ease;
       display: flex;
       align-items: center;
       gap: 8px;
-      transition: all 0.3s ease;
-      box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-      position: relative;
+    }
+
+    .nav-links a:hover {
+      background: rgba(255, 255, 255, 0.3);
+      transform: translateY(-3px);
+    }
+
+    section {
+      padding: 60px 20px;
+      text-align: center;
+      max-width: 1000px;
+      margin: 0 auto;
+    }
+
+    #tentang {
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      padding: 40px;
+      margin-top: 50px;
+      backdrop-filter: blur(8px);
+      animation: fadeUp 1.5s ease;
+    }
+
+    #tentang h2 {
+      font-size: 2rem;
+      margin-bottom: 20px;
+    }
+
+    #tentang p {
+      font-size: 1.1rem;
+      line-height: 1.8;
+      opacity: 0.95;
+    }
+
+    #proyek {
+      margin-top: 70px;
+    }
+
+    #proyek h2 {
+      font-size: 2rem;
+      margin-bottom: 40px;
+    }
+
+    .grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 25px;
+    }
+
+    .card {
+      background: rgba(255, 255, 255, 0.15);
+      border-radius: 20px;
       overflow: hidden;
+      backdrop-filter: blur(10px);
+      transition: all 0.3s ease;
     }
 
-    .links a::before {
-      content: "";
-      position: absolute;
-      top: 0;
-      left: -100%;
+    .card:hover {
+      transform: translateY(-5px) scale(1.02);
+    }
+
+    .card img {
       width: 100%;
-      height: 100%;
-      background: linear-gradient(90deg, rgba(255,255,255,0.3), rgba(255,255,255,0));
-      transition: all 0.5s;
+      height: 180px;
+      object-fit: cover;
     }
 
-    .links a:hover::before {
-      left: 100%;
+    .card-content {
+      padding: 20px;
     }
 
-    .links a:hover {
-      transform: translateY(-3px) scale(1.05);
-      background: linear-gradient(135deg, #a770ef, #cf8bf3, #80d0c7);
+    .card-content h3 {
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card-content p {
+      font-size: 0.95rem;
+      opacity: 0.9;
+      line-height: 1.5;
     }
 
     footer {
-      position: absolute;
-      bottom: 20px;
+      text-align: center;
+      padding: 30px;
       font-size: 0.9rem;
-      opacity: 0.7;
-      animation: fadeIn 2s ease forwards 1.2s;
-      z-index: 1;
+      opacity: 0.8;
+      background: rgba(255, 255, 255, 0.1);
+      margin-top: 80px;
     }
 
-    /* Animations */
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    @keyframes slideDown {
+    @keyframes fadeDown {
       from { opacity: 0; transform: translateY(-20px); }
       to { opacity: 1; transform: translateY(0); }
     }
 
-    @keyframes float {
-      from { transform: translateY(0); }
-      to { transform: translateY(-10px); }
-    }
-
-    h1, p {
-      animation: slideDown 1.5s ease forwards, float 5s ease-in-out infinite alternate 2s;
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
     }
 
     @media (max-width: 600px) {
-      h1 {
+      header h1 {
         font-size: 2rem;
       }
-      p {
-        font-size: 1rem;
-      }
-      .links a {
+      .nav-links a {
         padding: 10px 20px;
       }
     }
   </style>
 </head>
 <body>
-  <div class="wave"></div>
+  <header>
+    <h1>Selamat Datang di Uncle Property</h1>
+    <p>Investasi tanah kavling dengan lokasi strategis dan nilai masa depan yang menjanjikan.</p>
 
-  <h1>Selamat Datang di Bincang Property</h1>
-  <p>Temukan investasi tanah kavling terbaik dengan lokasi strategis dan harga menarik.</p>
+    <div class="nav-links">
+      <a href="#tentang"><i class="lucide-info"></i> Tentang Kami</a>
+      <a href="#proyek"><i class="lucide-map-pin"></i> Proyek Kami</a>
+      <a href="https://wa.me/62895365282575?text=Halo%20Uncle%20Property!%20Saya%20tertarik%20dengan%20informasi%20tanah%20kavling." target="_blank">
+        <i class="lucide-phone"></i> Hubungi Kami
+      </a>
+    </div>
+  </header>
 
-  <div class="links">
-    <a href="#tentang"><i class="lucide-info"></i> Tentang Kami</a>
-    <a href="#proyek"><i class="lucide-map-pin"></i> Proyek Kami</a>
-    <a href="#hubungi"><i class="lucide-phone"></i> Hubungi Kami</a>
-    <a href="https://instagram.com" target="_blank"><i class="lucide-instagram"></i> Instagram</a>
-  </div>
+  <section id="tentang">
+    <h2>Tentang Kami</h2>
+    <p>
+      Uncle Property adalah mitra terpercaya Anda dalam investasi tanah kavling.  
+      Kami percaya bahwa setiap jengkal tanah menyimpan potensi besar untuk masa depan yang lebih sejahtera.  
+      Dengan pengalaman dan jaringan yang luas, kami menghadirkan pilihan lahan strategis dengan nilai jual tinggi,  
+      baik untuk investasi jangka panjang maupun pembangunan properti impian Anda.  
+      Komitmen kami adalah memberikan pelayanan profesional, transparan, dan menguntungkan bagi setiap klien.
+    </p>
+  </section>
 
-  <footer>© 2025 Bincang Property. All rights reserved.</footer>
+  <section id="proyek">
+    <h2>Proyek Kami</h2>
+    <div class="grid">
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1580587771525-78b9dba3b914?auto=format&fit=crop&w=800&q=60" alt="Tanah Kavling Yeh Gangga">
+        <div class="card-content">
+          <h3>Tanah Kavling Yeh Gangga</h3>
+          <p>Lokasi hanya 5 menit dari pantai. Harga mulai 530 juta/100m². Cocok untuk villa atau investasi jangka panjang.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1523217582562-09d0def993a6?auto=format&fit=crop&w=800&q=60" alt="Tanah Muding Mekar">
+        <div class="card-content">
+          <h3>Tanah Kavling Muding Mekar</h3>
+          <p>Area strategis dekat pusat kota Denpasar. Harga 900 juta/are. Infrastruktur siap, cocok untuk hunian eksklusif.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1505691938895-1758d7feb511?auto=format&fit=crop&w=800&q=60" alt="Tanah Cepaka Village">
+        <div class="card-content">
+          <h3>Tanah Kavling Cepaka Village</h3>
+          <p>Suasana tenang di tengah alam hijau Tabanan. Cocok untuk villa pribadi. Harga bersaing dan legalitas aman.</p>
+        </div>
+      </div>
+      <div class="card">
+        <img src="https://images.unsplash.com/photo-1568605114967-8130f3a36994?auto=format&fit=crop&w=800&q=60" alt="Tanah Cemagi View">
+        <div class="card-content">
+          <h3>Tanah Kavling Cemagi View</h3>
+          <p>View sawah dan laut memukau. Akses mudah ke Canggu dan Tanah Lot. Investasi ideal untuk masa depan Anda.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <footer>© 2025 Uncle Property. All rights reserved.</footer>
 </body>
 </html>
