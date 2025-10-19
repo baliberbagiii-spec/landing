@@ -1,257 +1,97 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="id">
 <head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Uncle Property</title>
-  <link href="https://unpkg.com/lucide-static@latest/font/lucide.css" rel="stylesheet" />
-  <style>
-    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&display=swap');
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Uncle Property Bali</title>
+  <link rel="stylesheet" href="styles.css">
+  <script src="data.js" defer></script>
+  <link rel="icon" href="ico.ico" type="image/x-icon">
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      document.getElementById('btn-about').addEventListener('click', () => showPanel('about'));
+      document.getElementById('hubungi-kami').addEventListener('click', () => {
+        const phone = '62895365282575';
+        const text = encodeURIComponent('Halo Uncle Property, saya tertarik dengan properti Anda. Mohon info lebih lanjut.');
+        window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+      });
+      renderGrid();
+    });
 
-    * {
-      margin: 0;
-      padding: 0;
-      box-sizing: border-box;
-      font-family: 'Poppins', sans-serif;
+    function renderGrid() {
+      const grid = document.getElementById('projects-grid');
+      grid.innerHTML = '';
+      projects.forEach(p => {
+        const card = document.createElement('article');
+        card.className = 'project-card';
+        card.innerHTML = `
+          <button class="card-click" data-id="${p.id}" aria-label="Lihat detail ${p.title}">
+            <div class="card-photo"><img src="${p.image}" loading="lazy" alt="${p.title}"></div>
+            <div class="card-caption"><strong>Kavling</strong> – ${p.title}</span></div>
+          </button>
+        `;
+        card.querySelector('.card-click').addEventListener('click', (e) => {
+          const id = e.currentTarget.dataset.id;
+          window.open(`detail.html?id=${id}`, '_blank');
+        });
+        grid.appendChild(card);
+      });
     }
 
-    body {
-      background: linear-gradient(135deg, #EB5A3C, #DF9755, #E7D283, #EDF4C2);
-      color: #2b2b2b;
-      overflow-x: hidden;
-      display: flex;
-      flex-direction: column;
-      min-height: 100vh;
-    }
-
-    header {
-      padding: 70px 20px 30px;
-      text-align: center;
-      animation: fadeIn 1.5s ease forwards;
-    }
-
-    h1 {
-      font-size: clamp(1.8rem, 4vw, 3rem);
-      font-weight: 600;
-      color: #fff;
-      text-shadow: 0 3px 10px rgba(0,0,0,0.15);
-      display: inline-flex;
-      align-items: center;
-      gap: 10px;
-    }
-
-    h1 i {
-      background: rgba(255,255,255,0.2);
-      padding: 10px;
-      border-radius: 50%;
-      backdrop-filter: blur(6px);
-      color: #fff;
-      transition: transform 0.3s ease;
-    }
-
-    h1 i:hover {
-      transform: rotate(-10deg) scale(1.1);
-    }
-
-    header p {
-      font-size: clamp(1rem, 2.5vw, 1.1rem);
-      margin-top: 10px;
-      color: #fefefe;
-      opacity: 0.9;
-    }
-
-    .links {
-      display: flex;
-      flex-wrap: wrap;
-      justify-content: center;
-      gap: 15px;
-      margin-top: 30px;
-    }
-
-    .links a {
-      text-decoration: none;
-      color: #2b2b2b;
-      background: rgba(255, 255, 255, 0.8);
-      padding: 10px 25px;
-      border-radius: 40px;
-      font-weight: 500;
-      backdrop-filter: blur(10px);
-      display: flex;
-      align-items: center;
-      gap: 8px;
-      transition: all 0.3s ease;
-    }
-
-    .links a:hover {
-      transform: translateY(-3px);
-      background: #fff;
-    }
-
-    section {
-      padding: 60px 20px;
-      text-align: center;
-    }
-
-    /* Tentang Kami */
-    #tentang {
-      max-width: 800px;
-      margin: 0 auto 40px;
-      line-height: 1.8;
-      background: rgba(255,255,255,0.35);
-      border-radius: 16px;
-      padding: 25px;
-      backdrop-filter: blur(8px);
-      color: #2b2b2b;
-      box-shadow: 0 8px 20px rgba(0,0,0,0.1);
-    }
-
-    #tentang h2 {
-      margin-bottom: 15px;
-      font-size: 1.6rem;
-      color: #2b2b2b;
-    }
-
-    /* Proyek Kami */
-    #proyek h2 {
-      margin-bottom: 25px;
-      font-size: 1.6rem;
-      color: #2b2b2b;
-    }
-
-    .projects {
-      display: grid;
-      grid-template-columns: repeat(auto-fit, minmax(260px, 1fr));
-      gap: 25px;
-      margin-top: 20px;
-      max-width: 1200px;
-      margin-inline: auto;
-    }
-
-    .project-card {
-      background: rgba(255,255,255,0.4);
-      border-radius: 18px;
-      overflow: hidden;
-      transition: all 0.3s ease;
-      box-shadow: 0 4px 12px rgba(0,0,0,0.15);
-    }
-
-    .project-card:hover {
-      transform: translateY(-5px);
-      background: rgba(255,255,255,0.55);
-    }
-
-    .project-card img {
-      width: 100%;
-      height: 180px;
-      object-fit: cover;
-    }
-
-    .project-card h3 {
-      font-size: 1.05rem;
-      margin: 12px 10px 5px;
-      color: #333;
-    }
-
-    .project-card p {
-      font-size: 0.9rem;
-      padding: 0 15px 20px;
-      color: #444;
-    }
-
-    footer {
-      margin-top: auto;
-      text-align: center;
-      padding: 15px 10px;
-      font-size: 0.9rem;
-      color: #2b2b2b;
-      background: rgba(255,255,255,0.35);
-      backdrop-filter: blur(5px);
-      border-top: 1px solid rgba(255,255,255,0.3);
-    }
-
-    @keyframes fadeIn {
-      from { opacity: 0; transform: translateY(10px); }
-      to { opacity: 1; transform: translateY(0); }
-    }
-
-    /* RESPONSIVE OPTIMIZATION */
-    @media (max-width: 768px) {
-      header {
-        padding-top: 50px;
+    function showPanel(kind) {
+      const overlay = document.getElementById('overlay');
+      const panel = document.getElementById('overlay-content');
+      if (kind === 'about') {
+        panel.innerHTML = `<h5>Kami adalah partner terpercaya Anda dalam investasi tanah kavling eksklusif di Bali.
+                           <br />Dengan pengalaman dan komitmen tinggi dalam pengembangan properti, kami menghadirkan proyek-proyek kavling yang bernilai investasi tinggi, legalitas jelas, dan lokasi strategis.
+                           <br />
+                           <br /><strong>Mengapa memilih kami?</strong>
+                           <br />
+                           <br />– Legalitas aman & sertifikat jelas (SHM)
+                           <br />– Lokasi kavling strategis dan mudah diakses
+                           <br />– Harga kompetitif dengan potensi nilai jual tinggi
+                           <br />– Tim profesional siap mendampingi hingga proses balik nama selesai
+                           <br />
+                           <br />Kami tidak hanya menjual tanah — kami membantu Anda membangun kepercayaan dan masa depan
+                           <br /></p> <button class="close-overlay">Kembali</button>`;
+      } 
+      else if (kind === 'contact') {
+        panel.innerHTML = `<h2>Kontak</h2><p>Jika ada pertanyaan perihal lahan kami dan lainnya silahkan hubungi <strong>nomer dibawah ini.</strong></p><button id="whatsapp-direct">Hubungi via WhatsApp</button><button class="close-overlay">Tutup</button>`;
+        panel.querySelector('#whatsapp-direct').addEventListener('click', () => {
+          const phone = '62895365282575';
+          const text = encodeURIComponent('Halo Uncle Property, saya ingin bertanya.');
+          window.open(`https://wa.me/${phone}?text=${text}`, '_blank');
+        });
       }
-
-      .links {
-        flex-direction: column;
-      }
-
-      .project-card img {
-        height: 160px;
-      }
+      overlay.classList.add('visible');
+      overlay.querySelectorAll('.close-overlay').forEach(b => b.addEventListener('click', () => overlay.classList.remove('visible')));
     }
-
-    @media (max-width: 480px) {
-      h1 {
-        font-size: 1.8rem;
-      }
-
-      .project-card img {
-        height: 150px;
-      }
-
-      #tentang {
-        padding: 20px 15px;
-      }
-    }
-  </style>
+  </script>
 </head>
 <body>
-  <header>
-    <h1><i class="lucide-home"></i> Uncle Property</h1>
-    <p>Partner terpercaya Anda dalam investasi tanah kavling eksklusif dengan lokasi strategis dan potensi tinggi di Bali.</p>
-    <div class="links">
-      <a href="#tentang"><i class="lucide-info"></i> Tentang Kami</a>
-      <a href="#proyek"><i class="lucide-map-pin"></i> Proyek Kami</a>
-      <a href="https://wa.me/62895365282575?text=Halo%20Uncle%20Property!%20Saya%20tertarik%20dengan%20informasi%20tanah%20kavling." target="_blank">
-        <i class="lucide-phone"></i> Hubungi Kami
-      </a>
-    </div>
+  <header class="site-header">
+    <div class="brand"><h2>Uncle <span>Property</span></h2></div>
+    <nav class="nav">
+     <button id="btn-about" class="nav-btn">ABOUT US</button>
+    
+    </nav>
   </header>
-
-  <section id="tentang">
-    <h2>Tentang Kami</h2>
-    <p>Uncle Property hadir sebagai solusi investasi cerdas di bidang properti tanah kavling. Kami mengutamakan kejelasan legalitas, lokasi premium, serta potensi nilai jual tinggi.
-      Dengan pengalaman dan komitmen tinggi, kami membantu Anda memiliki aset tanah yang aman, menguntungkan, dan bernilai masa depan.  
-      Setiap proyek yang kami tawarkan dirancang agar menjadi pilihan ideal — baik untuk membangun hunian impian maupun investasi jangka panjang.</p>
-  </section>
-
-  <section id="proyek">
-    <h2>Proyek Kami</h2>
-    <div class="projects">
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1600607687920-4e2a09cf159d" alt="Tanah Kavling Yeh Gangga">
-        <h3>Tanah Kavling Yeh Gangga</h3>
-        <p>Lokasi hanya 5 menit dari pantai Yeh Gangga. Harga mulai 530 juta/100m². Cocok untuk villa pribadi atau investasi jangka panjang.</p>
+  <main>
+    <section class="hero">
+      <div class="hero-inner">
+        <p class="lead">Miliki kavling impian Anda di <strong>Bali</strong> hari ini, dan rasakan pertumbuhan nilai <strong>investasi</strong> nyata dari waktu ke waktu.</p>
       </div>
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1560185127-6ed189bf02f4" alt="Tanah Kavling Muding Mekar">
-        <h3>Tanah Kavling Muding Mekar</h3>
-        <p>Area strategis dekat pusat kota Denpasar. Harga 900 juta/are. Infrastruktur siap, cocok untuk hunian eksklusif.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1505693416388-ac5ce068fe85" alt="Tanah Kavling Cepaka Village">
-        <h3>Tanah Kavling Cepaka Village</h3>
-        <p>Suasana tenang di tengah alam hijau Tabanan. Cocok untuk villa pribadi. Harga bersaing dengan legalitas aman.</p>
-      </div>
-      <div class="project-card">
-        <img src="https://images.unsplash.com/photo-1600585154340-be6161a56a0c" alt="Tanah Kavling Cemagi View">
-        <h3>Tanah Kavling Cemagi View</h3>
-        <p>View sawah dan laut memukau. Akses mudah ke Canggu dan Tanah Lot. Investasi ideal untuk masa depan Anda.</p>
-      </div>
-    </div>
-  </section>
-
-  <footer>
-    © 2025 Uncle Property. All rights reserved.
-  </footer>
+    </section>
+    <section class="projects-section">
+      <h1 class="section-title">PROYEK KAMI</h1>
+      <div id="projects-grid" class="projects-grid"></div>
+    </section>
+    <section class="cta">
+      <p>Tertarik memiliki properti impian di Bali?</p>
+      <button id="hubungi-kami" class="cta-btn">HUBUNGI KAMI</button>
+    </section>
+  </main>
+  <footer class="site-footer">Semua Hak Dilindungi © 2025 Uncle Property</footer>
+  <div id="overlay" class="overlay"><div id="overlay-content" class="overlay-content"></div></div>
 </body>
 </html>
